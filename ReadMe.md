@@ -50,26 +50,13 @@ docker-compose up --build
 
 Same as if `npm run dev` is run locally, except that the web application will run inside a docker container with the necessary environment setup properly.
 
-### How to build files for production (with server)
-#### Local
+### How to build files for production
 ```shell
 npm run prod
 ```
 
-This will clean the dist folder and create an optimized react and server builds inside /dist folder. The server files will be inside /dist/server.
+This will clean the dist folder and create an optimized react and server builds inside `/dist` folder. The server files will be inside `/dist/server`.
 Also a `prod-bundle-stats.html` file will be created in the project root, this file shows an analysis for what included in the bundle
-
-#### Docker
-```shell
-npm run prod
-docker-compose -f docker-compose.production.yml up --build
-```
-
-This will build the web application, build an image with the necessary production files, then run the web application inside a docker container. The web application will be running using `pm2` and served behind an `nginx` reverse proxy that serves the website under [localhost](http://localhost/) port 80.
-
-Note that `docker-compose.production.yml` may be configured to spawn more than one `node` containers and have `nginx` equally distribute traffic to each container.
-
-For production deployment, the image will need to be pushed to Docker Hub or a private repository and built in the production server(s).
 
 ### Visual Studio Code Debugging
 The boilerplate has provisions for debugging the Node.js server using Visual Studio Code. Note that **Node Debug 2** extension must be installed from vscode marketplace.
@@ -130,12 +117,42 @@ BASE_URL=http://example.com npm run test:integration
 ```
 
 ## Deployment
-### Amazon Web Services (AWS)
-1. Run `eb init`
-1. Choose the correct environment
-1. Run `eb deploy`
+### Docker
+Compile the web application, build an image, and then push it to Docker Hub:
+```shell
+npm run prod
 
-Make sure the correct environment variables are set up
+docker build . -f ./.docker/node.production.dockerfile -t [account]/[repository]:isomorphic-react-boilerplate
+
+docker push [account]/[repository]:isomorphic-react-boilerplate
+```
+
+On the production server, setup Docker client and copy the docker-compose configuration files:
+- `.docker/config/nginx.production.conf`
+- `.docker/nginx.production.dockerfile`
+- `docker-compose.production.yml`
+
+On the production server, run the following commands:
+```shell
+docker-compose -f docker-compose.production.yml up --build
+```
+
+The web application is configured to run using `pm2` and served behind an `nginx` reverse proxy that serves the website under [localhost](http://localhost/) port 80. Note that `docker-compose.production.yml` may be configured to spawn more than one `node` containers and have `nginx` equally distribute traffic to each container.
+
+### Amazon Web Services (AWS) Elastic Beanstalk
+Prerequisites:
+- [Install AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
+- Setup the Elastic Beanstalk application through AWS console.
+
+To deploy:
+1. Run `eb init`, then choose the correct environment.
+1. Then run the following commands:
+```shell
+npm run prod
+eb deploy
+```
+
+Make sure the correct environment variables are set up in Elastic Beanstalk:
 
 | Variable Name | Values                           | Purpose                                   |
 | ------------- | -------------------------------- | ----------------------------------------- |
@@ -171,4 +188,4 @@ Make sure the correct environment variables are set up
 
 # TODO
 - UI testing framework (Selenium/TestCafe)
-- Update deployment guide
+- Production deployment guide using Kubernetes
