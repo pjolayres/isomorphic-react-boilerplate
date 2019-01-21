@@ -76,8 +76,6 @@ This configuration will attach the vscode debugger to the running node express s
 This will start the web application in a docker environment and allows remote debugging. Note that the website will not start until a debugger is attached. This allows the developer to debug the application startup code.
 
 #### Docker
-
-1. Execute the following inside the
 ```shell
 docker-compose -f docker-compose.debug.yml up --build
 ```
@@ -85,7 +83,7 @@ docker-compose -f docker-compose.debug.yml up --build
 1. Open debug view in vscode sidebar and choose **Docker: Attach to Node** from the configuration dropdown.
 1. Start the debugger by pressing `F5`.
 
-This will start the web application in a docker environment and allows remote debugging. The debugging experience will be similar to that of debugging locally.
+This will start the web application in a docker environment that allows remote debugging. The debugging experience will be similar to that of debugging locally.
 
 ### Docker cleanup
 To clean up docker containers:
@@ -118,7 +116,7 @@ BASE_URL=http://example.com npm run test:integration
 
 ## Deployment
 ### Docker
-Compile the web application, build an image, and then push it to Docker Hub:
+Compile the web application, build an image, and then push it to the Docker registry:
 ```shell
 npm run prod
 
