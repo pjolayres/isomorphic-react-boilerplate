@@ -137,7 +137,7 @@ On the production server, run the following commands:
 docker-compose -f docker-compose.production.yml up --build
 ```
 
-The web application is configured to run using `pm2` and served behind an `nginx` reverse proxy that serves the website under [localhost](http://localhost/) port 80. Note that `docker-compose.production.yml` may be configured to spawn more than one `node` containers and have `nginx` equally distribute traffic to each container.
+The web application is configured to run using `pm2` and served behind an `nginx` reverse proxy that serves the website under [localhost](http://localhost/) port 80.
 
 ### Amazon Web Services (AWS) Elastic Beanstalk
 Prerequisites:
