@@ -14,7 +14,8 @@
     "server": "npm run prod && cross-env NODE_ENV=production node server.js",
     "test": "jest .*\\.test\\.js",
     "test:integration": "jest .*\\.test\\.integration\\.js",
-    "lint": "node_modules/.bin/eslint ./src --fix"
+    "lint": "node_modules/.bin/eslint ./src --fix",
+    "heroku-postbuild": "npm run prod"
   },
   "author": "",
   "license": "ISC",
