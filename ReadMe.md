@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/pjolayres/isomorphic-react-boilerplate.svg?style=svg)](https://circleci.com/gh/pjolayres/isomorphic-react-boilerplate)
+[![Travis CI](https://travis-ci.com/pjolayres/isomorphic-react-boilerplate.svg?branch=master)](https://travis-ci.com/pjolayres/isomorphic-react-boilerplate)
 
 # Isomorphic React Boilerplate
 Isomorphic Node.js + Express + ReactJS boilerplate.
